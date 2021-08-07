@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CalculatorTest.Helpers;
+using CalculatorTest.Pages;
+using System;
 using TechTalk.SpecFlow;
 
 namespace CalculatorTest.Steps
@@ -6,28 +8,35 @@ namespace CalculatorTest.Steps
     [Binding]
     public class CalculatorSteps
     {
+        CalculatorPage _calculatorPage;
+
+        public CalculatorSteps()
+        {
+            _calculatorPage = new CalculatorPage();
+        }
+
         [Given(@"the first number is (.*)")]
         public void GivenTheFirstNumberIs(int p0)
         {
-            ScenarioContext.Current.Pending();
+            _calculatorPage.hhhhhmmm();
         }
         
         [Given(@"the second number is (.*)")]
         public void GivenTheSecondNumberIs(int p0)
         {
-            ScenarioContext.Current.Pending();
+
         }
         
         [When(@"the two numbers are added")]
         public void WhenTheTwoNumbersAreAdded()
         {
-            ScenarioContext.Current.Pending();
+
         }
         
         [Then(@"the result should be (.*)")]
         public void ThenTheResultShouldBe(int p0)
         {
-            ScenarioContext.Current.Pending();
+            Helper.TearDownDriver();
         }
     }
 }
