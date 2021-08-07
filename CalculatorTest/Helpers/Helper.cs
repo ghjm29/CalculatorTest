@@ -3,7 +3,9 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace CalculatorTest.Helpers
 {
@@ -11,7 +13,11 @@ namespace CalculatorTest.Helpers
     {
 
         public static IWebDriver _driver;
+        public static string fileName;
         static WebDriverWait _wait;
+        static string timeAndDate;
+        static int ssCounter = 0;
+        static DirectoryInfo reportPath;
 
 
         public static IWebDriver runDriver()
@@ -26,6 +32,7 @@ namespace CalculatorTest.Helpers
 
                 _driver = new ChromeDriver(chromeOptions);
                 InitializeWait();
+                SetReportDirectory();
             }
             return _driver;
         }
@@ -67,6 +74,31 @@ namespace CalculatorTest.Helpers
                     return false;
                 }
             });
+        }
+
+        private static void SetReportDirectory()
+        {
+            timeAndDate = new StringBuilder(DateTime.Now.ToString()).Replace("/", "").Replace(":", "").ToString();
+            reportPath = new DirectoryInfo(Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\..\\..\\TestResults\\")) + Regex.Replace(timeAndDate, @"\s", ""));
+        }
+
+        public string takeScreenShot(string ssName)
+        {
+            ssCounter++;
+            fileName = null;
+            fileName = ssCounter.ToString() + "_" + ssName + "_" + fileName + timeAndDate + ".png";
+            var screenshotFile = reportPath + "\\" + fileName;
+            if (reportPath.Exists == true)
+            {
+                ((ITakesScreenshot)_driver).GetScreenshot().SaveAsFile(screenshotFile);
+            }
+            else
+            {
+                reportPath.Create();
+                ((ITakesScreenshot)_driver).GetScreenshot().SaveAsFile(screenshotFile);
+            }
+            Console.WriteLine("Screenshot saved: - " + fileName);
+            return fileName;
         }
 
         /// <summary>
