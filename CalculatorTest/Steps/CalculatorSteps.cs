@@ -53,5 +53,37 @@ namespace CalculatorTest.Steps
         {
             Helper.TearDownDriver();
         }
+
+        [Given(@"Open chrome browser and start application")]
+        public void GivenOpenChromeBrowserAndStartApplication()
+        {
+            _calculatorPage.NavigateToCalculatorPage();
+            _calculatorPage.PressCalculatorValue("c");
+        }
+
+        [When(@"I (.*) (.*) and (.*)")]
+        public void WhenIAnd(string operatorValue, string value1, string value2)
+        {
+
+            _calculatorPage.PressCalculatorValue(value1);
+            _helper.takeScreenShot("FirstValuePressed_" + value1);
+            _calculatorPage.PressCalculatorValue(operatorValue);
+            _helper.takeScreenShot("OperatorPressed_" + operatorValue);
+            _calculatorPage.PressCalculatorValue(value2);
+            _helper.takeScreenShot("SecondValuePressed_" + value2);
+        }
+
+        [Then(@"(.*) should be displayed")]
+        public void ThenShouldBeDisplayed(string p0)
+        {
+            _calculatorPage.PressCalculatorValue("=");
+            _helper.takeScreenShot("ActualResult_");
+            //AssertHere Enable OCR Space
+            //screenshot actual value
+            //get value here
+            _calculatorPage.PressCalculatorValue("c");
+            //click clear
+        }
+
     }
 }

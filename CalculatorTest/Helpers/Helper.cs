@@ -108,50 +108,85 @@ namespace CalculatorTest.Helpers
         /// <param name="value">Keyboard value to be converted</param>
         public void SendKeys(By elementLocator, string value)
         {
-            switch (value)
+            value = ConvertOperator(value);
+            var count = value.Length;
+            for (int i = 0; i < count; i++)
             {
-                case "1":
-                    _driver.FindElement(elementLocator).SendKeys(Keys.NumberPad1);
-                    break;
-                case "2":
-                    _driver.FindElement(elementLocator).SendKeys(Keys.NumberPad2);
-                    break;
-                case "3":
-                    _driver.FindElement(elementLocator).SendKeys(Keys.NumberPad3);
-                    break;
-                case "4":
-                    _driver.FindElement(elementLocator).SendKeys(Keys.NumberPad4);
-                    break;
-                case "5":
-                    _driver.FindElement(elementLocator).SendKeys(Keys.NumberPad5);
-                    break;
-                case "6":
-                    _driver.FindElement(elementLocator).SendKeys(Keys.NumberPad6);
-                    break;
-                case "7":
-                    _driver.FindElement(elementLocator).SendKeys(Keys.NumberPad7);
-                    break;
-                case "8":
-                    _driver.FindElement(elementLocator).SendKeys(Keys.NumberPad8);
-                    break;
-                case "9":
-                    _driver.FindElement(elementLocator).SendKeys(Keys.NumberPad9);
-                    break;
-                case "0":
-                    _driver.FindElement(elementLocator).SendKeys(Keys.NumberPad0);
-                    break;
-                case "+":
-                    _driver.FindElement(elementLocator).SendKeys(Keys.Add);
-                    break;
-                case "-":
-                    _driver.FindElement(elementLocator).SendKeys(Keys.Subtract);
-                    break;
-                case "/":
-                    _driver.FindElement(elementLocator).SendKeys(Keys.Divide);
-                    break;
-                case "=":
-                    _driver.FindElement(elementLocator).SendKeys(Keys.Equal);
-                    break;
+                var s = value[i];
+                switch (s)
+                {
+                    case '1':
+                        _driver.FindElement(elementLocator).SendKeys(Keys.NumberPad1);
+                        break;
+                    case '2':
+                        _driver.FindElement(elementLocator).SendKeys(Keys.NumberPad2);
+                        break;
+                    case '3':
+                        _driver.FindElement(elementLocator).SendKeys(Keys.NumberPad3);
+                        break;
+                    case '4':
+                        _driver.FindElement(elementLocator).SendKeys(Keys.NumberPad4);
+                        break;
+                    case '5':
+                        _driver.FindElement(elementLocator).SendKeys(Keys.NumberPad5);
+                        break;
+                    case '6':
+                        _driver.FindElement(elementLocator).SendKeys(Keys.NumberPad6);
+                        break;
+                    case '7':
+                        _driver.FindElement(elementLocator).SendKeys(Keys.NumberPad7);
+                        break;
+                    case '8':
+                        _driver.FindElement(elementLocator).SendKeys(Keys.NumberPad8);
+                        break;
+                    case '9':
+                        _driver.FindElement(elementLocator).SendKeys(Keys.NumberPad9);
+                        break;
+                    case '0':
+                        _driver.FindElement(elementLocator).SendKeys(Keys.NumberPad0);
+                        break;
+                    case '.':
+                        _driver.FindElement(elementLocator).SendKeys(Keys.Decimal);
+                        break;
+                    case '+':
+                        _driver.FindElement(elementLocator).SendKeys(Keys.Add);
+                        break;
+                    case '_':
+                        _driver.FindElement(elementLocator).SendKeys(Keys.Subtract);
+                        break;
+                    case '/':
+                        _driver.FindElement(elementLocator).SendKeys(Keys.Divide);
+                        break;
+                    case '=':
+                        _driver.FindElement(elementLocator).SendKeys(Keys.Equal);
+                        break;
+                    case '-':
+                        _driver.FindElement(elementLocator).SendKeys(Keys.Shift + 3);
+                        break;
+                    case 'c':
+                        _driver.FindElement(elementLocator).SendKeys("c");
+                        break;
+                }
+            }
+        }
+
+        private string ConvertOperator(string value)
+        {
+            if (value.Equals("Add"))
+            {
+                return "+";
+            }
+            else if (value.Equals("Subtract"))
+            {
+                return "_";
+            }
+            else if (value.Equals("Divide"))
+            {
+                return "/";
+            }
+            else
+            {
+                return value;
             }
         }
     }

@@ -14,7 +14,7 @@ namespace CalculatorTest.Pages
 
         By _byFrameCanvas = By.Id("fullframe");
         By _byCalculator = By.Id("canvas");
-        By _body = By.TagName("body");
+        By _byBody = By.TagName("body");
 
         public CalculatorPage()
         {
@@ -27,10 +27,21 @@ namespace CalculatorTest.Pages
             _driver.Navigate().GoToUrl("https://www.online-calculator.com/full-screen-calculator/");
             _helper.WaitForElement(_byFrameCanvas);
             //_driver.SwitchTo().Frame(_driver.FindElement(_byFrameCanvas));
-            _driver.FindElement(_body).SendKeys(Keys.NumberPad9);
-            _driver.FindElement(_body).SendKeys(Keys.NumberPad9);
-            _driver.FindElement(_body).SendKeys(Keys.NumberPad9);
-            _driver.FindElement(_body).SendKeys(Keys.NumberPad9);
+            _driver.FindElement(_byBody).SendKeys(Keys.NumberPad9);
+            _driver.FindElement(_byBody).SendKeys(Keys.NumberPad9);
+            _driver.FindElement(_byBody).SendKeys(Keys.NumberPad9);
+            _driver.FindElement(_byBody).SendKeys(Keys.NumberPad9);
+        }
+
+        public void NavigateToCalculatorPage()
+        {
+            _driver.Navigate().GoToUrl("https://www.online-calculator.com/full-screen-calculator/");
+            _helper.WaitForElement(_byFrameCanvas);
+        }
+
+        public void PressCalculatorValue(string value)
+        {
+            _helper.SendKeys(_byBody, value);
         }
     }
 }

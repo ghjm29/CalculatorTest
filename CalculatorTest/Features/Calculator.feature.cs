@@ -117,6 +117,61 @@ this.ScenarioInitialize(scenarioInfo);
             }
             this.ScenarioCleanup();
         }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Test subtraction, division and addition functionalities")]
+        [NUnit.Framework.CategoryAttribute("Test")]
+        [NUnit.Framework.TestCaseAttribute("Add", "1", "1", "2", null)]
+        [NUnit.Framework.TestCaseAttribute("Subtract", "11", "33", "-22", null)]
+        [NUnit.Framework.TestCaseAttribute("Divide", "1000", "2.5", "400", null)]
+        [NUnit.Framework.TestCaseAttribute("Add", "-1234", "1", "-1233", null)]
+        public virtual void TestSubtractionDivisionAndAdditionFunctionalities(string @operator, string value1, string value2, string expectedValue, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "Test"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            string[] tagsOfScenario = @__tags;
+            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
+            argumentsOfScenario.Add("operator", @operator);
+            argumentsOfScenario.Add("value1", value1);
+            argumentsOfScenario.Add("value2", value2);
+            argumentsOfScenario.Add("expectedValue", expectedValue);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Test subtraction, division and addition functionalities", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 12
+this.ScenarioInitialize(scenarioInfo);
+#line hidden
+            bool isScenarioIgnored = default(bool);
+            bool isFeatureIgnored = default(bool);
+            if ((tagsOfScenario != null))
+            {
+                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((this._featureTags != null))
+            {
+                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
+            }
+            if ((isScenarioIgnored || isFeatureIgnored))
+            {
+                testRunner.SkipScenario();
+            }
+            else
+            {
+                this.ScenarioStart();
+#line 13
+ testRunner.Given("Open chrome browser and start application", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line hidden
+#line 14
+ testRunner.When(string.Format("I {0} {1} and {2}", @operator, value1, value2), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+#line 15
+ testRunner.Then(string.Format("{0} should be displayed", expectedValue), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            }
+            this.ScenarioCleanup();
+        }
     }
 }
 #pragma warning restore
