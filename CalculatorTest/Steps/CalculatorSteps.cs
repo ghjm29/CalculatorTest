@@ -25,37 +25,6 @@ namespace CalculatorTest.Steps
             _ocrResponse = new OcrResponse();
         }
 
-        [Given(@"the first number is (.*)")]
-        public void GivenTheFirstNumberIs(int p0)
-        {
-
-            _calculatorPage.hhhhhmmm();
-            var fileName = _helper.takeScreenShot("Result");
-            //wowrking can get value now
-            //var a = _ocrSpaceService.ReadImageService(fileName).Content;
-            //_ocrResponse = JsonConvert.DeserializeObject<OcrResponse>(a);
-            //var w = _ocrResponse.ParsedResults[0].TextOverlay.Lines[0].LineText;
-        }
-
-
-        [Given(@"the second number is (.*)")]
-        public void GivenTheSecondNumberIs(int p0)
-        {
-
-        }
-        
-        [When(@"the two numbers are added")]
-        public void WhenTheTwoNumbersAreAdded()
-        {
-
-        }
-        
-        [Then(@"the result should be (.*)")]
-        public void ThenTheResultShouldBe(int p0)
-        {
-            Helper.TearDownDriver();
-        }
-
         [Given(@"Open chrome browser and start application")]
         public void GivenOpenChromeBrowserAndStartApplication()
         {
@@ -82,7 +51,7 @@ namespace CalculatorTest.Steps
             var fileName = _helper.takeScreenShot("ActualResult_");
             _ocrResponse = JsonConvert.DeserializeObject<OcrResponse>(_ocrSpaceService.ReadImageService(fileName).Content);
             var actualValue = _ocrResponse.ParsedResults[0].TextOverlay.Lines[0].LineText;
-            Assert.AreEqual(expectedValue, actualValue, "Error expected value is - " + expectedValue + ". Actual is - " + actualValue);
+            Assert.AreEqual(expectedValue, actualValue, "Error expected value is - " + expectedValue + ", but actual is - " + actualValue + ".");
             _calculatorPage.PressCalculatorValue("c");
         }
 

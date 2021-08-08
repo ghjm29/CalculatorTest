@@ -22,17 +22,6 @@ namespace CalculatorTest.Pages
             _helper = new Helper();
         }
 
-        public void hhhhhmmm()
-        {
-            _driver.Navigate().GoToUrl("https://www.online-calculator.com/full-screen-calculator/");
-            _helper.WaitForElement(_byFrameCanvas);
-            //_driver.SwitchTo().Frame(_driver.FindElement(_byFrameCanvas));
-            _driver.FindElement(_byBody).SendKeys(Keys.NumberPad9);
-            _driver.FindElement(_byBody).SendKeys(Keys.NumberPad9);
-            _driver.FindElement(_byBody).SendKeys(Keys.NumberPad9);
-            _driver.FindElement(_byBody).SendKeys(Keys.NumberPad9);
-        }
-
         public void NavigateToCalculatorPage()
         {
             _driver.Navigate().GoToUrl("https://www.online-calculator.com/full-screen-calculator/");
