@@ -9,18 +9,22 @@ namespace CalculatorTest.Steps
     public class CalculatorSteps
     {
         CalculatorPage _calculatorPage;
+        Helper _helper;
 
         public CalculatorSteps()
         {
             _calculatorPage = new CalculatorPage();
+            _helper = new Helper();
         }
 
         [Given(@"the first number is (.*)")]
         public void GivenTheFirstNumberIs(int p0)
         {
             _calculatorPage.hhhhhmmm();
+            _helper.takeScreenShot("Result");
         }
-        
+
+
         [Given(@"the second number is (.*)")]
         public void GivenTheSecondNumberIs(int p0)
         {

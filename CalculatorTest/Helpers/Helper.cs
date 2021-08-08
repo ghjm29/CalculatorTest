@@ -3,6 +3,8 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -91,15 +93,35 @@ namespace CalculatorTest.Helpers
             if (reportPath.Exists == true)
             {
                 ((ITakesScreenshot)_driver).GetScreenshot().SaveAsFile(screenshotFile);
+                justTrying(screenshotFile);
             }
             else
             {
                 reportPath.Create();
+                justTrying(screenshotFile);
                 ((ITakesScreenshot)_driver).GetScreenshot().SaveAsFile(screenshotFile);
             }
             Console.WriteLine("Screenshot saved: - " + fileName);
             return fileName;
         }
+
+        public void justTrying(string fileName)
+        {
+            //string fileName = @"C:\path\to\my\image\file.jpg";
+            Screenshot screenshot = ((ITakesScreenshot)_driver).GetScreenshot();
+            ImageFormat format = ImageFormat.Tiff;
+            using (MemoryStream imageStream = new MemoryStream(screenshot.AsByteArray))
+            {
+                using (FileStream fileStream = new FileStream(fileName, FileMode.Create))
+                {
+                    using (Image screenshotImage = Image.FromStream(imageStream))
+                    {
+                        screenshotImage.Save(fileStream, format);
+                    }
+                }
+            }
+        }
+    
 
         /// <summary>
         /// Convert string value from examples table to keys that will be sent via keyboard
