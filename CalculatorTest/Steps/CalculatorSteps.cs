@@ -4,6 +4,7 @@ using CalculatorTest.Services;
 using Newtonsoft.Json;
 using NUnit.Framework;
 using System;
+using System.Threading;
 using TechTalk.SpecFlow;
 
 namespace CalculatorTest.Steps
@@ -65,7 +66,6 @@ namespace CalculatorTest.Steps
         [When(@"I (.*) (.*) and (.*)")]
         public void WhenIAnd(string operatorValue, string value1, string value2)
         {
-
             _calculatorPage.PressCalculatorValue(value1);
             _helper.takeScreenShot("FirstValuePressed_" + value1);
             _calculatorPage.PressCalculatorValue(operatorValue);
@@ -75,16 +75,15 @@ namespace CalculatorTest.Steps
         }
 
         [Then(@"(.*) should be displayed")]
-        public void ThenShouldBeDisplayed(string p0)
+        public void ThenShouldBeDisplayed(string expectedValue)
         {
             _calculatorPage.PressCalculatorValue("=");
-            //Assert.Fail("Failed");
-            _helper.takeScreenShot("ActualResult_");
-            //AssertHere Enable OCR Space
-            //screenshot actual value
-            //get value here
+            Thread.Sleep(200);
+            var fileName = _helper.takeScreenShot("ActualResult_");
+            _ocrResponse = JsonConvert.DeserializeObject<OcrResponse>(_ocrSpaceService.ReadImageService(fileName).Content);
+            var actualValue = _ocrResponse.ParsedResults[0].TextOverlay.Lines[0].LineText;
+            Assert.AreEqual(expectedValue, actualValue, "Error expected value is - " + expectedValue + ". Actual is - " + actualValue);
             _calculatorPage.PressCalculatorValue("c");
-            //click clear
         }
 
     }

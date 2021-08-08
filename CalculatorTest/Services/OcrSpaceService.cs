@@ -16,9 +16,15 @@ namespace CalculatorTest.Services
             request.AddParameter("language", "eng");
             request.AddParameter("isOverlayRequired", "true");
             request.AddParameter("iscreatesearchablepdf", "false");
-            request.AddParameter("issearchablepdfhidetextlayer", "false");
+            request.AddParameter("issearchablepdfhidetextlayer", "true");
+            request.AddParameter("filetype", ".Auto");
             request.AddFile("file", filePath);
             request.AddParameter("OCREngine", "2");
+            request.AddParameter("detectOrientation", "false");
+            request.AddParameter("isTable", "false");
+            request.AddParameter("scale", "true");
+            request.AddParameter("detectCheckbox", "false");
+            request.AddParameter("checkboxTemplate", "0");
             return client.Execute(request);
         }
     }
