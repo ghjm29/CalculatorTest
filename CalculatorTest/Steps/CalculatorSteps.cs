@@ -2,6 +2,7 @@
 using CalculatorTest.Pages;
 using CalculatorTest.Services;
 using Newtonsoft.Json;
+using NUnit.Framework;
 using System;
 using TechTalk.SpecFlow;
 
@@ -77,6 +78,7 @@ namespace CalculatorTest.Steps
         public void ThenShouldBeDisplayed(string p0)
         {
             _calculatorPage.PressCalculatorValue("=");
+            //Assert.Fail("Failed");
             _helper.takeScreenShot("ActualResult_");
             //AssertHere Enable OCR Space
             //screenshot actual value
