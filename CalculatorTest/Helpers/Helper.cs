@@ -98,7 +98,7 @@ namespace CalculatorTest.Helpers
                 ((ITakesScreenshot)_driver).GetScreenshot().SaveAsFile(screenshotFile);
             }
             Console.WriteLine("Screenshot saved: - " + fileName);
-            return fileName;
+            return screenshotFile;
         }
 
         /// <summary>
