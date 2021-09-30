@@ -27,5 +27,15 @@ namespace CalculatorTest.Services
             request.AddParameter("checkboxTemplate", "0");
             return client.Execute(request);
         }
+
+        public IRestResponse CreateUser(string payload)
+        {
+            var client = new RestClient("https://reqres.in/api/users");
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Content-Type", "application/json");
+            request.AddParameter("application/json", payload, ParameterType.RequestBody);
+            return client.Execute(request);
+        }
     }
 }
